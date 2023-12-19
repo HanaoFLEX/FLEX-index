@@ -5,7 +5,7 @@ class DefaultConfig(object):
     topk =50 # 最终遍历叶子节点数量
     reassign_bin_num = 2 # 再分配到叶子节点数量
     train_topk = 50
-    ratio = 2
+    ratio = 1.2
     Avg_Dis = 40000
-
+    train_rate = 0.8
 opt = DefaultConfig()
