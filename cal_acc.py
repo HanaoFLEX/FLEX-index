@@ -9,13 +9,9 @@ import datas_load as load
 from getindex import getindex
 
 def overall_radio(knn_dis, knn_dis_): #真正用于计算的 knn_dis_ 就是knn_dis*(*无法作为命名符号)
-    # print(knn_dis_)
-    # print(knn_dis)
-    # result_len  表示找到的knn的个数，可能找到不足 我们设定每次比较找到的knn 与  和找到的knn一样长度的real_knn作比较
-    result_num = len(knn_dis_)
-    # print("we_find_knnnum", result_num)
 
-    # 如果找不到k个值，就往后面补零
+    result_num = len(knn_dis_)
+
     if result_num!=opt.knn_num :
         knn_dis_ = np.pad(knn_dis_, (0,opt.knn_num-len(knn_dis_)), 'constant', constant_values=(0,0))
         # print(knn_dis_)
@@ -27,9 +23,7 @@ def overall_radio(knn_dis, knn_dis_): #真正用于计算的 knn_dis_ 就是knn_
     else :
         knn_dis_ = np.array(knn_dis_)[0]
         knn_dis = np.array(knn_dis)[0]
-    # tmp = 0
-    # print(knn_dis_)
-    # print(knn_dis)
+
     if opt.knn_num == 1 :
         if knn_dis_ -0.0 > 1e-5: # knn = 1 的时候 找的结果不正确
             return 1.0001# 不然的话 knn_dis 第一个值为0  如果正常计算就会有分母为0  的时候
@@ -58,7 +52,7 @@ def cal_overall_radio(file_name,knn,dis,knn1,dis1):
     # print("\nall_find-knn",time_fin_KNN-time1)
 
 
-    overall = overall_radio(dis, dis1)
+    # overall = overall_radio(dis, dis1)
     # time_overall = time.time()
     # print("time_overall",time_overall-time_fin_KNN)
 
@@ -68,7 +62,7 @@ def cal_overall_radio(file_name,knn,dis,knn1,dis1):
     # print("time_recall",time_recall-time_overall)
 
     # print("Acc_time",time.time()-time1)
-    return overall,recall,flag,result_num
+    return recall,flag,result_num
 
 def recall_(knn, knn_):
     # print(knn[:opt.knn_num])
